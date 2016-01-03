@@ -21,7 +21,7 @@ int main(int argc, char** argv)
   radio.setRetries(15,15);
   radio.setPayloadSize(8);
   radio.setPALevel(RF24_PA_MAX);
-  radio.setChannel(120);
+  radio.setChannel(110);
 
   radio.openWritingPipe(pipes[0]);
   radio.openReadingPipe(1,pipes[1]);
@@ -30,9 +30,9 @@ int main(int argc, char** argv)
 
   radio.printDetails();
 
-  //while (1) {
+  while (1) {
 	  loop();
-  //}
+  }
 
   return 0;
 }
@@ -45,5 +45,7 @@ void loop() {
     radio.read(data, 2);
 
     // Spew it
-    printf("Data: %i, %i\n\r", data[0], data[1]);
+    //printf("Data: %i, %i\n\r", data[0], data[1]);
+    int16_t temp_int_rec = (int16_t) (((data[0] & 0x00FF) << 8) | (data[1] & 0x00FF));
+    printf("\n temp_int_rec=%d", temp_int_rec);
 }
