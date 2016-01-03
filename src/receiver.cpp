@@ -33,10 +33,11 @@ int main(int argc, char** argv)
 
   listen_enabled = 1;
 
+  fflush(stdout);
+
   while (1) {
 	  //loop();
      sleep(5);
-     fflush(stdout);
   }
 
   return 0;
@@ -77,4 +78,6 @@ void dataReceivedIRQ() {
 		int16_t temp_int_rec = (int16_t) (((data[0] & 0x00FF) << 8) | (data[1] & 0x00FF));
 		printf("\n temp_int_rec=%d", temp_int_rec);
     }
+
+    fflush(stdout);
 }
