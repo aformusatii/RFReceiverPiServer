@@ -78,7 +78,7 @@ void dataReceivedIRQ() {
                     int16_t temp_int_rec = (int16_t) (((data[2] & 0x00FF) << 8) | (data[3] & 0x00FF));
                     printf("\n temp_int_rec=%d", temp_int_rec);
 
-                    char buffer[5];
+                    char buffer[255];
                     sprintf(buffer, "./save.sh %d %d", data[1], temp_int_rec);
                     system(buffer);
 		}
