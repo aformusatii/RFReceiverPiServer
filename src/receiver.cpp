@@ -70,13 +70,18 @@ void dataReceivedIRQ() {
     //}
 
     if (rx_ok) {
-		uint8_t data[] = {0, 0};
-		radio.read(data, 2);
+		uint8_t data[] = {0, 0, 0, 0};
+		radio.read(data, 4);
 
-		// Spew it
-		//printf("Data: %i, %i\n\r", data[0], data[1]);
-		int16_t temp_int_rec = (int16_t) (((data[0] & 0x00FF) << 8) | (data[1] & 0x00FF));
-		printf("\n temp_int_rec=%d", temp_int_rec);
+		if (data[0] == 100) {
+                    // Spew it
+                    int16_t temp_int_rec = (int16_t) (((data[2] & 0x00FF) << 8) | (data[3] & 0x00FF));
+                    printf("\n temp_int_rec=%d", temp_int_rec);
+
+                    char buffer[5];
+                    sprintf(buffer, "./save.sh %d %d", data[1], temp_int_rec);
+                    system(buffer);
+		}
     }
 
     fflush(stdout);
