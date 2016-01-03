@@ -8,6 +8,7 @@
 
 #include "../nrf24l01/RF24.h"
 
+volatile int listen_enabled = 0;
 RF24 radio;
 const uint64_t pipes[2] = { 0xF0F0F0F0E1LL, 0xF0F0F0F0D2LL };
 void loop();
@@ -15,7 +16,7 @@ void loop();
 int main(int argc, char** argv)
 {
 
-  printf("Start NRF24L01P test...");
+  printf("Start NRF24L01P test...\n");
 
   radio.begin();
   radio.setRetries(15,15);
@@ -30,17 +31,20 @@ int main(int argc, char** argv)
 
   radio.printDetails();
 
+  listen_enabled = 1;
+
   while (1) {
 	  //loop();
-	  sleep(100);
+     sleep(5);
+     fflush(stdout);
   }
 
   return 0;
 }
 
 void loop() {
-	while (!radio.available()) {
-	}
+    while (!radio.available()) {
+    }
 
 	uint8_t data[] = {0, 0};
     radio.read(data, 2);
@@ -52,10 +56,16 @@ void loop() {
 }
 
 void dataReceivedIRQ() {
-	while (!radio.available()) {
-	}
+    if (!listen_enabled) {
+	return;
+    }
 
-	uint8_t data[] = {0, 0};
+    printf("\nIRQ!");
+
+    //while (!radio.available()) {
+    //}
+
+    uint8_t data[] = {0, 0};
     radio.read(data, 2);
 
     // Spew it
