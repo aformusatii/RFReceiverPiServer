@@ -57,19 +57,24 @@ void loop() {
 
 void dataReceivedIRQ() {
     if (!listen_enabled) {
-	return;
+    	return;
     }
+
+    bool tx_ok, tx_fail, rx_ok;
+    radio.whatHappened(tx_ok,tx_fail,rx_ok);
 
     printf("\nIRQ!");
 
     //while (!radio.available()) {
     //}
 
-    uint8_t data[] = {0, 0};
-    radio.read(data, 2);
+    if (rx_ok) {
+		uint8_t data[] = {0, 0};
+		radio.read(data, 2);
 
-    // Spew it
-    //printf("Data: %i, %i\n\r", data[0], data[1]);
-    int16_t temp_int_rec = (int16_t) (((data[0] & 0x00FF) << 8) | (data[1] & 0x00FF));
-    printf("\n temp_int_rec=%d", temp_int_rec);
+		// Spew it
+		//printf("Data: %i, %i\n\r", data[0], data[1]);
+		int16_t temp_int_rec = (int16_t) (((data[0] & 0x00FF) << 8) | (data[1] & 0x00FF));
+		printf("\n temp_int_rec=%d", temp_int_rec);
+    }
 }
