@@ -1,6 +1,6 @@
 #include "RaspberryPi.h"
 
-const int fd;
+volatile int fd = 0;
 
 /* ======================================================= */
 // Set up a memory regions to access GPIO
