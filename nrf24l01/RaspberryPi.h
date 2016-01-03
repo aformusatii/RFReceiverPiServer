@@ -40,6 +40,7 @@
 #define SPI_CHANNEL 1
 #define SPI_CSN 6 // BCM 25
 #define SPI_CE  5 // BCM 24
+#define SPI_IRQ 1 // BCM 18
 
 /* =========== SPI and GPIO function ============ */
 void setup_io();
@@ -48,6 +49,7 @@ void setCSN(uint8_t value);
 void setCE(uint8_t value);
 uint8_t transfer_spi(uint8_t tx_);
 void pabort(const char *s);
+void dataReceivedIRQ();
 
 /* =========== TIME function and variables ====== */
 #ifdef	__cplusplus

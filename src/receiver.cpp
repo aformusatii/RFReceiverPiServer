@@ -31,13 +31,27 @@ int main(int argc, char** argv)
   radio.printDetails();
 
   while (1) {
-	  loop();
+	  //loop();
+	  sleep(100);
   }
 
   return 0;
 }
 
 void loop() {
+	while (!radio.available()) {
+	}
+
+	uint8_t data[] = {0, 0};
+    radio.read(data, 2);
+
+    // Spew it
+    //printf("Data: %i, %i\n\r", data[0], data[1]);
+    int16_t temp_int_rec = (int16_t) (((data[0] & 0x00FF) << 8) | (data[1] & 0x00FF));
+    printf("\n temp_int_rec=%d", temp_int_rec);
+}
+
+void dataReceivedIRQ() {
 	while (!radio.available()) {
 	}
 
