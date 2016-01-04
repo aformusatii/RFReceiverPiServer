@@ -52,7 +52,7 @@ void dataReceivedIRQ() {
 
     if (rx_ok) {
         uint8_t data[] = { 0, 0, 0, 0 };
-        bool has_more_data = radio.read(data, 4);
+        radio.read(data, 4);
 
         if (data[0] == 100) {
             // Spew it
@@ -64,9 +64,9 @@ void dataReceivedIRQ() {
             sprintf(cmd, "./save.sh %d %d", data[1], temp_int_rec);
             system(cmd);
 
-            while (has_more_data) {
+            while (radio.available()) {
                 uint8_t buff[] = { 0 };
-                has_more_data = radio.read(buff, 1);
+                radio.read(buff, 1);
                 printf("\n[%d]", buff[0]);
             }
         }
