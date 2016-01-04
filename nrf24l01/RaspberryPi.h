@@ -39,7 +39,7 @@
 #define SPI_SPEED 250000
 #define SPI_CHANNEL 1
 #define SPI_CSN 6 // BCM 25
-#define SPI_CE  5 // BCM 24
+#define SPI_CE  3 // BCM 22
 #define SPI_IRQ 1 // BCM 18
 
 /* =========== SPI and GPIO function ============ */

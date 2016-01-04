@@ -47,4 +47,5 @@ Temporary Items
 .apdisk
 Release
 src/receiver
+src/transmitter
 receiver.log
