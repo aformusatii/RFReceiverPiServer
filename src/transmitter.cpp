@@ -37,6 +37,8 @@ int main(int argc, char** argv)
   else
     printf("failed.\n\r");
 
+  printf("> %ld", __millis());
+
   return 0;
 }
 
