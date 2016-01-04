@@ -11,6 +11,7 @@ void setup_io()
 
    pinMode (SPI_CSN, OUTPUT);
    pinMode (SPI_CE, OUTPUT);
+   pinMode (SPI_IRQ, INPUT);
 
    if (wiringPiISR (SPI_IRQ, INT_EDGE_FALLING, &dataReceivedIRQ) < 0) {
      pabort("Unable to setup ISR");
