@@ -22,8 +22,8 @@ int main(int argc, char** argv)
   radio.setPALevel(RF24_PA_MAX);
   radio.setChannel(110);
 
-  radio.openWritingPipe(pipes[1]);
-  radio.openReadingPipe(1,pipes[0]);
+  radio.openWritingPipe(pipes[0]);
+  radio.openReadingPipe(1,pipes[1]);
   
   radio.printDetails();
 
