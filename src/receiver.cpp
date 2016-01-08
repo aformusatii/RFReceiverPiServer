@@ -75,6 +75,7 @@ void dataReceivedIRQ() {
         }
 
         while (radio.available()) {
+            printf("\nread");
             uint8_t buff[] = { 0 };
             radio.read(buff, 1);
             printf("\n[%d]", buff[0]);
