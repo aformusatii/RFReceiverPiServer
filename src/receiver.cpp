@@ -68,7 +68,7 @@ void dataReceivedIRQ() {
             system(cmd);
 
         } else {
-
+            printf("\n[%d]", data[0]);
             char cmd[255];
             sprintf(cmd, "./remote.sh %d", data[0]);
             system(cmd);
