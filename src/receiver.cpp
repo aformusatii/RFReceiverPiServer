@@ -51,24 +51,30 @@ void dataReceivedIRQ() {
     printf("\nIRQ!");
 
     if (rx_ok) {
-        uint8_t data[] = { 0, 0, 0, 0 };
-        radio.read(data, 4);
+        uint8_t data[] = { 0 };
+        radio.read(data, 1);
 
         if (data[0] == 100) {
+            uint8_t temp_data[] = { 0, 0, 0 };
+            radio.read(temp_data, 3);
+
             // Spew it
-            int16_t temp_int_rec = (int16_t) (((data[2] & 0x00FF) << 8)
-                    | (data[3] & 0x00FF));
+            int16_t temp_int_rec = (int16_t) (((temp_data[1] & 0x00FF) << 8)
+                    | (temp_data[2] & 0x00FF));
             printf("\nT=%d", temp_int_rec);
 
             char cmd[255];
-            sprintf(cmd, "./save.sh %d %d", data[1], temp_int_rec);
+            sprintf(cmd, "./save.sh %d %d", temp_data[0], temp_int_rec);
             system(cmd);
 
-            while (radio.available()) {
-                uint8_t buff[] = { 0 };
-                radio.read(buff, 1);
-                printf("\n[%d]", buff[0]);
-            }
+        } else {
+            printf("\nIR -> [%d]", data[0]);
+        }
+
+        while (radio.available()) {
+            uint8_t buff[] = { 0 };
+            radio.read(buff, 1);
+            printf("\n[%d]", buff[0]);
         }
     }
 
