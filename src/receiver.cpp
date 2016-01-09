@@ -73,12 +73,7 @@ void dataReceivedIRQ() {
             system(cmd);
         }
 
-        while (radio.available()) {
-            printf("\nread");
-            uint8_t buff[] = { 0 };
-            radio.read(buff, 1);
-            printf("\n[%d]", buff[0]);
-        }
+        radio.flush_rx();
     }
 
     fflush(stdout);
