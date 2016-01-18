@@ -63,13 +63,13 @@ void dataReceivedIRQ() {
             printf("\nT=%d", temp_int_rec);
 
             char cmd[255];
-            sprintf(cmd, "./save.sh %d %d", data[1], temp_int_rec);
+            sprintf(cmd, "./save.sh %d %d &", data[1], temp_int_rec);
             system(cmd);
 
         } else {
             printf("\n[%d]", data[0]);
             char cmd[255];
-            sprintf(cmd, "./remote.sh %d", data[0]);
+            sprintf(cmd, "./remote.sh %d &", data[0]);
             system(cmd);
         }
 
