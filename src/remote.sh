@@ -9,10 +9,10 @@ case $1 in
 	28) mpc prev > /dev/null 2>&1;;
 	18) mpc seek -1% > /dev/null 2>&1;;
 	19) mpc seek +1% > /dev/null 2>&1;;
-        30) /home/pi/repository/PiSocketClient/src/socketClient 192.168.1.120 115 1 1 1;;
-        31) /home/pi/repository/PiSocketClient/src/socketClient 192.168.1.120 115 255 255 255;;
-        32) /home/pi/repository/PiSocketClient/src/socketClient 192.168.1.120 115 50 5 0;;
-         3) /home/pi/repository/PiSocketClient/src/socketClient 192.168.1.120 115 0 0 0;;
+        30) /var/www/alexa/scripts/setRGBLEDValue.sh 1 1 1;;
+        31) /var/www/alexa/scripts/setRGBLEDValue.sh 255 255 255;;
+        32) /var/www/alexa/scripts/setRGBLEDValue.sh 50 5 0;;
+         3) /var/www/alexa/scripts/setRGBLEDValue.sh 0 0 0;;
         14) echo -n '0' >> key_buf.txt;;
          4) echo -n '1' >> key_buf.txt;;
          5) echo -n '2' >> key_buf.txt;;

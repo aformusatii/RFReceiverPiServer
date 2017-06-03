@@ -1,0 +1,3 @@
+#THIS REPO IS DEPRECATED 
+
+Old version of receiver based on NRF24L01+, migrating to ESP8266...

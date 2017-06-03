@@ -58,7 +58,7 @@ void dataReceivedIRQ() {
 
         if (data[0] == 100) {
             int16_t value_int_rec = (int16_t) (((data[3] & 0x00FF) << 8) | (data[4] & 0x00FF));
-            printf("\nSensor=%d, Type=%d, Value=%d", data[1], data[2], value_int_rec);
+            printf("\nSensor=%d, Type=%d, Value=%d\n", data[1], data[2], value_int_rec);
 
             char cmd[255];
             sprintf(cmd, "./save.sh %d %d %d &", data[1], data[2], value_int_rec);
